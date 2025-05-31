@@ -7,6 +7,7 @@ require_relative '../lib/csv_exporter'
 
 options = {
   radius: 3000,
+  offset: 0,
   output: 'listings.csv'
 }
 
@@ -15,6 +16,7 @@ OptionParser.new do |opts|
 
   opts.on("-a", "--address ADDRESS", "Address to search from") { |v| options[:address] = v }
   opts.on("-r", "--radius RADIUS", Integer, "Radius in meters") { |v| options[:radius] = v }
+  opts.on("-n", "--offset OFFSET", Integer, "Pagination offset") { |v| options[:offset] = v }
   opts.on("-o", "--output FILE", "Output CSV filename") { |v| options[:output] = v }
 end.parse!
 

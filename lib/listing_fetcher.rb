@@ -1,5 +1,6 @@
 require 'date'
 require_relative 'api_client/client'
+require 'json'
 
 module ListingFetcher
   def self.fetch_properties(address, page_size, lat, lng, radius)
@@ -22,6 +23,9 @@ module ListingFetcher
       check_in: check_in,
       check_out: check_out
     )
+    File.open('out.json', 'w') do |f|
+      f.write(JSON.pretty_generate(initial_response))
+    end
 
     listings = extract_listings(initial_response)
 
@@ -29,21 +33,21 @@ module ListingFetcher
   end
 
   def self.fetch_prices_for_a_year_for_listing(listing)
-    today = Date.today
-    prices = {}
-    page_name = listing[:page_name]
+    # today = Date.today
+    # prices = {}
+    # page_name = listing[:page_name]
   
-    (0..(365 / 60)).each do |chunk_index|
-      start_date = today + (chunk_index * 60)
-      fetched_prices = fetch_prices_for_range(start_date, page_name)
-      prices.merge!(fetched_prices)
+    # (0..(365 / 60)).each do |chunk_index|
+    #   start_date = today + (chunk_index * 60)
+    #   fetched_prices = fetch_prices_for_range(start_date, page_name)
+    #   prices.merge!(fetched_prices)
   
-      # Sleep a little to avoid overwhelming the API
-      puts "😴 Sleeping briefly before the next price fetch..."
-      sleep(rand(0.5..1.0))
-    end
+    #   # Sleep a little to avoid overwhelming the API
+    #   puts "😴 Sleeping briefly before the next price fetch..."
+    #   sleep(rand(0.5..1.0))
+    # end
   
-    prices
+    # prices
   end
 
   def self.future_dates
@@ -61,6 +65,7 @@ module ListingFetcher
         title: res.dig('displayName', 'text'),
         page_name: res.dig('basicPropertyData', 'pageName'),
         base_price: res.dig('priceDisplayInfoIrene', 'displayPrice', 'amountPerStay', 'amountUnformatted'),
+        stars: res.dig("basicPropertyData", "starRating", "value")
       }
     end
   end

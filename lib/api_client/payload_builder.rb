@@ -63,7 +63,7 @@ module ApiClient
               testProperties: false
             },
             pagination: {
-              offset: 0,
+              offset: 51,
               rowsPerPage: page_size
             },
             referrerBlock: {
