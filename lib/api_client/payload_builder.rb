@@ -4,7 +4,7 @@ module ApiClient
   class PayloadBuilder
     SESSION_TOKEN = '041940cc850f0175'.freeze
 
-    def self.search(address:, page_size:, check_in:, check_out:, lat:, lng:, rad:)
+    def self.search(address:, page_size:, check_in:, check_out:, lat:, lng:, rad:, offset:)
       {
         operationName: 'FullSearch',
         variables: {
@@ -63,7 +63,7 @@ module ApiClient
               testProperties: false
             },
             pagination: {
-              offset: 51,
+              offset: offset,
               rowsPerPage: page_size
             },
             referrerBlock: {

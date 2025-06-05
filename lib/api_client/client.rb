@@ -8,7 +8,7 @@ module ApiClient
       'user-agent' => 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:136.0) Gecko/20100101 Firefox/136.0',
     }.freeze
 
-    def self.search_hotels(address:, page_size:, check_in:, check_out:, lat:, lng:, rad:)
+    def self.search_hotels(address:, page_size:, check_in:, check_out:, lat:, lng:, rad:, offset:)
       payload = ApiClient::PayloadBuilder.search(
         address: address,
         page_size: page_size,
@@ -16,7 +16,8 @@ module ApiClient
         check_out: check_out,
         lat: lat,
         lng: lng,
-        rad: rad
+        rad: rad,
+        offset: offset,
       )
       Connection.post(headers: HEADERS, payload: payload)
     end
@@ -26,7 +27,7 @@ module ApiClient
       Connection.post(headers: HEADERS, payload: payload)
     end
 
-    def self.fetch_property_prices(check_in:, pagename:, country_code: "us")
+    def self.fetch_property_prices(check_in:, pagename:, country_code: "it")
       payload = ApiClient::PayloadBuilder.availability(check_in: check_in, pagename: pagename, days: 60, country_code: country_code)
       Connection.post(headers: HEADERS, payload: payload)
     end

@@ -29,7 +29,7 @@ lat, lng = Location.fetch_coordinates(options[:address])
 puts "Located coordinates for '#{options[:address]}': (#{lat}, #{lng})"
 
 puts "Searching for listings within #{options[:radius]} meters of '#{options[:address]}'..."
-listings = ListingFetcher.fetch_properties(options[:address], 50, lat, lng, options[:radius])
+listings = ListingFetcher.fetch_properties(options[:address], 50, lat, lng, options[:radius], options[:offset])
 
 days = ListingFetcher.future_dates
 
