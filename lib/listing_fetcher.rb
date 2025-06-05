@@ -3,7 +3,7 @@ require_relative 'api_client/client'
 require 'json'
 
 module ListingFetcher
-  def self.fetch_properties(address, page_size, lat, lng, radius)
+  def self.fetch_properties(address, page_size, lat, lng, radius, offset)
     listings = []
 
     common_params = {
@@ -11,12 +11,13 @@ module ListingFetcher
       page_size: page_size,
       lat: lat,
       lng: lng,
-      rad: radius
+      rad: radius,
+      offset: offset,
     }
 
-    today = Date.today
+    today = Date.new(2025,9,3)
     check_in = today.strftime('%Y-%m-%d')
-    check_out = (today + 1).strftime('%Y-%m-%d')
+    check_out = (today + 3).strftime('%Y-%m-%d')
 
     initial_response = ApiClient::Client.search_hotels(
       **common_params,
