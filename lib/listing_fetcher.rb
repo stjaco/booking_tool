@@ -17,7 +17,7 @@ module ListingFetcher
 
     today = Date.new(2025,9,3)
     check_in = today.strftime('%Y-%m-%d')
-    check_out = (today + 1).strftime('%Y-%m-%d')
+    check_out = (today + 3).strftime('%Y-%m-%d')
 
     initial_response = ApiClient::Client.search_hotels(
       **common_params,
