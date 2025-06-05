@@ -15,7 +15,7 @@ module ListingFetcher
       offset: offset,
     }
 
-    today = Date.today
+    today = Date.new(2025,9,3)
     check_in = today.strftime('%Y-%m-%d')
     check_out = (today + 1).strftime('%Y-%m-%d')
 
