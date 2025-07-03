@@ -22,7 +22,7 @@ class CSVExporter
   private
 
   def build_headers
-    ['Listing ID', 'Title', 'Page Name', 'Base Price', 'Stars'] 
+    ['Listing ID', 'Title', 'Page Name', 'Base Price', 'Stars', 'Address', 'City', 'Country'] 
     # + @days +
     # ['Highest Price Date 1', 'Highest Price 1',
     #  'Highest Price Date 2', 'Highest Price 2',
@@ -30,7 +30,7 @@ class CSVExporter
   end
 
   def build_row(listing)
-    row = [listing[:id], listing[:title], listing[:page_name], listing[:base_price], listing[:stars]]
+    row = [listing[:id], listing[:title], listing[:page_name], listing[:base_price], listing[:stars], listing[:location_address], listing[:location_city], listing[:location_country]]
     # @days.each { |date| row << listing[:daily_prices][date] }
 
     # top_3 = listing[:daily_prices].select { |_, v| v }.sort_by { |_, v| -v.to_f }.first(3)

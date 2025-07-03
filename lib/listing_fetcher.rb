@@ -66,7 +66,10 @@ module ListingFetcher
         title: res.dig('displayName', 'text'),
         page_name: res.dig('basicPropertyData', 'pageName'),
         base_price: res.dig('priceDisplayInfoIrene', 'displayPrice', 'amountPerStay', 'amountUnformatted'),
-        stars: res.dig("basicPropertyData", "starRating", "value")
+        stars: res.dig("basicPropertyData", "starRating", "value"),
+        location_address: res.dig("basicPropertyData", "location", "address"),
+        location_city: res.dig("basicPropertyData", "location", "city"),
+        location_country: res.dig("basicPropertyData", "location", "countryCode")
       }
     end
   end
